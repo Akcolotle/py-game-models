@@ -2,6 +2,7 @@ import init_django_orm  # noqa: F401
 import json
 from db.models import Race, Skill, Guild, Player
 
+
 def main() -> None:
     with open("players.json", "r", encoding="utf-8") as file:
         players_data = json.load(file)
@@ -12,7 +13,8 @@ def main() -> None:
         race_desc = race_data.get("description", "")
         skills_data = race_data.get("skills", [])
 
-        race, _ = Race.objects.get_or_create(name=race_name, defaults={"description": race_desc})
+        race, _ = Race.objects.get_or_create(name=race_name,
+                                             defaults={"description": race_desc})
 
         for skill_info in skills_data:
             Skill.objects.get_or_create(
@@ -39,7 +41,6 @@ def main() -> None:
                 "guild": guild
             }
         )
-
 
 
 if __name__ == "__main__":
